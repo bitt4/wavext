@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
     fread(root_file_read_buffer, root_file_size, 1, root_file);
     fclose(root_file);
 
-    for(int i = 0; i < root_file_size; i++){
+    for(int i = 0; i < root_file_size - 3; i++){
         if(   root_file_read_buffer[i + 0] == 0x52    /* check for RIFF header */
            && root_file_read_buffer[i + 1] == 0x49
            && root_file_read_buffer[i + 2] == 0x46
