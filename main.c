@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void displayHelp();
 
@@ -31,10 +32,7 @@ int main(int argc, char *argv[]){
     fclose(root_file);
 
     for(int i = 0; i < root_file_size - 3; i++){
-        if(   root_file_read_buffer[i + 0] == 0x52    /* check for RIFF header */
-           && root_file_read_buffer[i + 1] == 0x49
-           && root_file_read_buffer[i + 2] == 0x46
-           && root_file_read_buffer[i + 3] == 0x46){
+        if(memcmp(root_file_read_buffer + i, "RIFF", 4) == 0){    /* check for RIFF buffer */
             fprintf(stdout, "RIFF header found.\n");
         }
     }
