@@ -1,4 +1,4 @@
-CXX ?=g++
+CXX ?=gcc
 
 FLAGS +=-O3 -Wall
 
