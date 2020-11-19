@@ -1,10 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <getopt.h>
 
 void displayHelp();
 
 int main(int argc, char *argv[]){
+
+    static struct option long_options[] = {
+                                           {"help", no_argument, NULL, 'h'},
+                                           {NULL, 0, NULL, 0}
+    };
+
+    int c;
+
+    while ((c = getopt_long(argc, argv, "h", long_options, NULL)) != -1) {
+        switch (c)
+            {
+            case 'h':
+                display_help();
+                exit(EXIT_FAILURE);
+            case '?':
+                fprintf(stderr,
+                        "%s: Use -h or --help to display options.\n", argv[0]);
+                exit(EXIT_FAILURE);
+            default: {}
+            }
+    }
 
     if(argc < 2){
         displayHelp();
@@ -60,12 +82,19 @@ int main(int argc, char *argv[]){
         }
     }
 
+    if(file_count == 0){
+        fprintf(stdout, "No wav files found.\n");
+    }
+    else {
+        fprintf(stdout, "%u files extracted.\n", file_count);
+    }
+
     free(root_file_read_buffer);
 
     return 0;
 }
 
 void displayHelp(){
-    fprintf(stderr, "Usage: wavext [OPTIONS...] [FILE]\n");
+    fprintf(stdout, "Usage: wavext [OPTIONS...] [FILE]\n");
     /* not fully implemented */
 }
