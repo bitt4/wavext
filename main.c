@@ -3,7 +3,7 @@
 #include <string.h>
 #include <getopt.h>
 
-void displayHelp();
+void display_help();
 
 int main(int argc, char *argv[]){
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]){
     }
 
     if(argc < 2){
-        displayHelp();
+        display_help();
         return -1;
     }
 
@@ -94,7 +94,7 @@ int main(int argc, char *argv[]){
     return 0;
 }
 
-void displayHelp(){
+void display_help(){
     fprintf(stdout, "Usage: wavext [OPTIONS...] [FILE]\n");
     /* not fully implemented */
 }
