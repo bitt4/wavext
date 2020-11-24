@@ -73,6 +73,9 @@ int main(int argc, char *argv[]){
                         break;
                     }
                 }
+
+                /* TODO: cleanup */
+
                 memcpy(&current_file_data_size, root_file_read_buffer + pos + data_header_offset, 4);    /* data size offset */
                 /* fprintf(stdout, "Data block size: %u.\n", current_file_data_size); */
 
