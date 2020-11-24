@@ -66,7 +66,14 @@ int main(int argc, char *argv[]){
 
             if(memcmp(root_file_read_buffer + pos + 8, "WAVEfmt ", 8) == 0){    /* check for WAVE and fmt headers */
                 /* fprintf(stdout, "WAVE and fmt headers found.\n"); */
-                memcpy(&current_file_data_size, root_file_read_buffer + pos + 40, 4);    /* data size offset */
+                int data_header_offset = 40;
+                for(int i = 0; i < 100; i++){
+                    if(memcmp(root_file_read_buffer + pos + i, "data", 4) == 0){
+                        data_header_offset = i + 4;
+                        break;
+                    }
+                }
+                memcpy(&current_file_data_size, root_file_read_buffer + pos + data_header_offset, 4);    /* data size offset */
                 /* fprintf(stdout, "Data block size: %u.\n", current_file_data_size); */
 
                 /* Check if data block of current file isn't bigger than length of remaining data in root file */
