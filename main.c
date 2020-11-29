@@ -7,6 +7,8 @@ void display_help();
 
 int main(int argc, char *argv[]){
 
+    char* root_filename = NULL;
+
     static struct option long_options[] = {
                                            {"help", no_argument, NULL, 'h'},
                                            {NULL, 0, NULL, 0}
@@ -28,12 +30,19 @@ int main(int argc, char *argv[]){
             }
     }
 
-    if(argc < 2){
+    /* get root file, which is non-option argument */
+    for (int i = optind; i < argc; i++){
+        root_filename = argv[i];
+        break;    /* ignore remaining args */
+    }
+
+    if(root_filename == NULL){
+        fprintf(stderr, "File not specified.\n");
         display_help();
         return -1;
     }
 
-    FILE* root_file = fopen(argv[1], "rb");
+    FILE* root_file = fopen(root_filename, "rb");
 
     if(root_file == NULL){
         fprintf(stderr, "Couldn't open file '%s'.\n", argv[1]);
