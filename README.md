@@ -14,7 +14,7 @@ Use `./wavext FILE` to extract wave files from FILE.
 
 ## Options
 | Option                  | Description                |
-|-------------------------+----------------------------|
+|-------------------------|----------------------------|
 | `-o`, `--output=PREFIX` | Specify output file prefix |
 | `-h`, `--help`          | Display help               |
 
